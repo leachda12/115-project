@@ -9,6 +9,14 @@ class UserData {
     }
 }
 
+// test classes to populate the array
+userDatabase.push(new UserData('adawg53', 'Adam', 'adawg53@email.com', 'password123'));
+userDatabase.push(new UserData('mononokay', 'David', 'leachda12@gmail.com', '03091994'));
+userDatabase.push(new UserData('ChrisWright515', 'Chris', 'ChrisWright515@email.com', 'iHave2Kids'));
+userDatabase.push(new UserData('mildishgambino', 'Donald', 'don-glover@email.com', 'til3005'));
+
+
+
 
 
 // ----- user info storage ----- //
