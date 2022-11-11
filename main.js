@@ -1,6 +1,6 @@
 // ----- user info class ----- //
 
-class userInfo {
+class UserData {
     constructor(username, firstName, email, password) {
         this.username = username;
         this.firstName = firstName;
@@ -8,6 +8,13 @@ class userInfo {
         this.password = password;
     }
 }
+
+
+
+// ----- user info storage ----- //
+
+let userDatabase = [];
+
 
 
 
@@ -19,6 +26,32 @@ $(document).ready(() => {
 
 
 
-$('.sup-submit').click((e) => {
+// ----- database functions ----- //
+
+function addUser() {
+
+    userDatabase.push(new UserData(
+        $('.sup-user').value,
+        $('.sup-name').value,
+        $('.sup-email').value,
+        $('.sup-password').value
+    ));
+}
+
+function checkUser(u) {
     
+}
+
+function checkPass() {
+
+}
+
+
+
+
+// ----- event functions ----- //
+
+
+$('.sup-submit').click(() => {
+
 })
