@@ -1,3 +1,9 @@
+// ----- user info storage ----- //
+
+let userDatabase = [];
+
+
+
 // ----- user info class ----- //
 
 class UserData {
@@ -14,15 +20,6 @@ userDatabase.push(new UserData('adawg53', 'Adam', 'adawg53@email.com', 'password
 userDatabase.push(new UserData('mononokay', 'David', 'leachda12@gmail.com', '03091994'));
 userDatabase.push(new UserData('ChrisWright515', 'Chris', 'ChrisWright515@email.com', 'iHave2Kids'));
 userDatabase.push(new UserData('mildishgambino', 'Donald', 'don-glover@email.com', 'til3005'));
-
-
-
-
-
-// ----- user info storage ----- //
-
-let userDatabase = [];
-
 
 
 
@@ -60,5 +57,5 @@ function checkPass() {
 
 
 $('.sup-submit').click(() => {
-
-})
+    if (userDatabase.forEach(e => e.name === $('.sup-name').value) && userDatabase.forEach(e => e.username === $('.sup-user').value))
+};
