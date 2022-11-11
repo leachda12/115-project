@@ -6,8 +6,8 @@ class UserData {
         this.firstName = firstName;
         this.email = email;
         this.password = password;
-    }
-}
+    };
+};
 
 // test classes to populate the array
 userDatabase.push(new UserData('adawg53', 'Adam', 'adawg53@email.com', 'password123'));
@@ -37,7 +37,6 @@ $(document).ready(() => {
 // ----- database functions ----- //
 
 function addUser() {
-
     userDatabase.push(new UserData(
         $('.sup-user').value,
         $('.sup-name').value,
