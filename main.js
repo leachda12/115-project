@@ -42,12 +42,39 @@ function addUser() {
     ));
 }
 
-function checkUser(u) {
-    
+function checkForInput() {
+    if ($('.sup-user').value === '' || $('.sup-name').value === '' || $('.sup-email').value === '' || $('.sup-password').value === '') {
+        return false;
+    }
+    else {
+        return true;
+    }
 }
 
-function checkPass() {
+// i believe we're going to have to use regex for this one
+function checkPassReqs() {
+    let pass = $('.sup-password').value;
+    let passLength = pass.length;
+    let passCapital = /[A-Z]/.test(pass);
+    let passLower = /[a-z]/.test(pass);
+    let passNum = /[0-9]/.test(pass);
+    let passSpecial = /[^A-Za-z0-9]/.test(pass);
+    let passSpace = /\s/.test(pass);
 
+    if (passLength < 8 || passLength > 20 || !passCapital || !passLower || !passNum || !passSpecial || passSpace) {
+        return false;
+    }
+    else {
+        return true;
+    }
+}
+
+function userDupeCheck() {
+    return userDatabase.some(({ username }) => username === $('.sup-user').value);
+}
+
+function emailDupeCheck() {
+    return userDatabase.some(({ email }) => email === $('.sup-email').value);
 }
 
 
@@ -57,5 +84,11 @@ function checkPass() {
 
 
 $('.sup-submit').click(() => {
-    if (userDatabase.forEach(e => e.name === $('.sup-name').value) && userDatabase.forEach(e => e.username === $('.sup-user').value))
-};
+    if (checkForInput() && checkPassReqs() && !userDupeCheck() && !emailDupeCheck()) {
+        addUser();
+        console.log(userDatabase);
+    }
+    else {
+        console.log('error');
+    }
+});
