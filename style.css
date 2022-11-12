@@ -103,7 +103,8 @@ html{
     list-style-type: none ;
 }
 .pass-req{
-  color:  #d3d3d3;
+  font-size: 50%;
+  /* color: red; */
 }
 .pass-reqX{
     color: red;
@@ -112,16 +113,16 @@ html{
 .pass-req-check{
     color: green;
 }
-.close-outline{
-    font-size: 24px;
-    margin-top: 5px;
-}
-.form-signup{
-    display: none;
+.form-sup{
+    visibility: hidden;
+    transform: scale(0);
+    transition: 1s;
 }
 /*Login  */
 .form-log{
     display: block;
+    transform: scale(1);
+    transition: 1s;
 }
 .log-user{
     width: 90%;
@@ -132,7 +133,7 @@ html{
 .log-next-to{
     margin-bottom: 50px;
 }
-.go-to-sup{
+.create-acc{
     font-size: 75%;
     margin :2.5px auto;
 }
@@ -142,6 +143,7 @@ html{
 a{
     color: #552583;
     transition: .4s;
+    cursor: pointer;
 }
 a:hover{
     
