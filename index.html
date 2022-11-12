@@ -13,34 +13,52 @@
     <title>Document</title>
 </head>
 <body>
+    <!-- Signup form -->
+    <div class="container">
+        <form class="form-signup form" action="">
+            <h1 class="sup-title title">Sign Up for</h1>
+                <input placeholder="First Name..." class="form-input sup-name" type="text" name="name" id="sup-name">
+            <div class="next-to">
+                    <input placeholder="Email..." class="form-input sup-email" type="email" name="email" id="sup-email">
+                    <input placeholder="Userame..." class="form-input sup-user" type="text" name="username" id="sup-user">
+            </div>
+            <div class="next-to">
+                    <input  placeholder="Password..." class="form-input sup-password" type="password" name="password" id="sup-password">
+                    <input placeholder="Confirm Password" class="form-input sup-confirm" type="password" name="sup-confirm" id="sup-confirm">
+            </div>
+            <div class="pass-needs" id="pass-needs">
+                <p> Your pasword must contain...</p>
+                <ul class="group">
+                    
+                    <li class="pass-reqX"><ion-icon class="close-outline" name="close-outline"></ion-icon> 1 Uppercase letter</li>  <!-- Class change to <ion-icon name="checkmark-outline green"></ion-icon> when each requirement is met--> 
+                    <li class="pass-reqX"><ion-icon class="close-outline" name="close-outline"></ion-icon> 1 Lowercase letter</li>
+                    <li class="pass-reqX"><ion-icon class="close-outline" name="close-outline"></ion-icon> 1 number</li>
+                
+                </ul>
+            </div>
+            <input class=" form-input sup-submit submit" type="submit" id="sup-submit" value="Sign Up">
+        </form>
+    </div>
+    <!--  -->
     
-    <form class="form-signup form" action="">
-        <h1 class="sup-title">Sign Up for</h1>
-        <div class="group">
-            <label class="form-label " for="name">First Name:</label>
-            <input class="form-input sup-name" type="text" name="name" id="sup-name">
-        </div>
-        <div class="next-to">
-            <div class="group">
-                <label class="form-label sup-email" for="email">Email:</label>
-                <input class="form-input sup-email" type="email" name="email" id="sup-email">
-            </div>
-            <div class="group">
-                <label for="username">Username:</label>
-                <input class="form-input sup-user" type="text" name="username" id="sup-user">
-            </div>
-        </div>
-        <div class="next-to">
-            <div class="group">
-                <label class="form-label" for="password">Password:</label>
-                <input class="form-input sup-password" type="password" name="password" id="sup-password">
-            </div>
-                <input placeholder="Confirm Password" class="form-input sup-confirm" type="password" name="sup-confirm" id="sup-confirm">
-        </div>
-        <input class=" form-input sup-submit" type="submit" id="sup-submit" value="Sign Up">
+    <!-- Login form -->
 
+    <form action="" class="form form-log">
+        <h1 class="title log-title">Log In</h1>
+        <div class="next-to log-next-to">
+            <input placeholder="Username..." type="text" name="log-user" id="log-user" class="log-user form-input">
+            <input placeholder="Password..." type="password" name="" id="log-pass" class="log-pass form-input">
+        </div>
+        <div class="next-to">
+            <input class="submit log-submit form-input" id = "log-submit"type="submit" value="Log In">
+                <div class="group log-group">
+                <p class="go-to-sup">Do not have an account? </p>
+                <a class="go-to-sup" href="">Create an Account</a>
+            </div>   
+        </div>
     </form>
-    
     <script src="main.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 </html>
