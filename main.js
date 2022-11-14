@@ -25,7 +25,7 @@ userDatabase.push(new UserData('mildishgambino', 'Donald', 'don-glover@email.com
 
 // ----- fire on page load ----- //
 
-$(document).ready(() => { 
+$(document).ready(() => {
 
 });
 
@@ -42,32 +42,6 @@ function addUser() {
     ));
 }
 
-function checkForInput() {
-    if ($('.sup-user').value === '' || $('.sup-name').value === '' || $('.sup-email').value === '' || $('.sup-password').value === '') {
-        return false;
-    }
-    else {
-        return true;
-    }
-}
-
-// i believe we're going to have to use regex for this one
-function checkPassReqs() {
-    let pass = $('.sup-password').value;
-    let passLength = pass.length;
-    let passCapital = /[A-Z]/.test(pass);
-    let passLower = /[a-z]/.test(pass);
-    let passNum = /[0-9]/.test(pass);
-    let passSpecial = /[^A-Za-z0-9]/.test(pass);
-    let passSpace = /\s/.test(pass);
-
-    if (passLength < 8 || passLength > 20 || !passCapital || !passLower || !passNum || !passSpecial || passSpace) {
-        return false;
-    }
-    else {
-        return true;
-    }
-}
 
 function userDupeCheck() {
     return userDatabase.some(({ username }) => username === $('.sup-user').value);
@@ -81,7 +55,6 @@ function emailDupeCheck() {
 
 // ----- event functions ----- //
 
-
 $('.sup-submit').click(() => {
     if (checkForInput() && checkPassReqs() && !userDupeCheck() && !emailDupeCheck()) {
         addUser();
@@ -92,11 +65,15 @@ $('.sup-submit').click(() => {
     }
 });
 
+
+
 // ----- Go to signup page ----- //
 $('.go-to-sup').click(() => {
     $(".form-log").css("transform", "scale(0.0, 0.0)")
-    $(".form-sup").css({"transform": "scale(1.0,1.0)", "visibility": "visible"})
+    $(".form-sup").css({ "transform": "scale(1.0,1.0)", "visibility": "visible" })
 });
+
+
 
 // ----- Show password requirements ----- //
 
@@ -108,15 +85,58 @@ $('.sup-password').focusin(() => {
 });
 
 
-// ----- Signup Password verification ----- //
-$('.sup-password').keyup(() => {
-    var length = $('.sup-password').val()
-    if(length.length >= 8){
-        console.log('test')
-        $('.upper-req').removeClass("pass-reqX")
-        $('.upper-req').css("color", "green")
-        $('.upper-req').attr("name" , "checkmark-outline")
-    }
-    
-})
 
+// ----- Signup Password verification ----- //
+// $('.sup-password').keyup(() => {
+//     var length = $('.sup-password').val()
+//     if (length.length >= 8) {
+//         $('.upper-req').removeClass("pass-reqX")
+//         $('.upper-req').css("color", "green")
+//         $('.upper-req').attr("name", "checkmark-outline")
+//     }
+
+// })
+
+function checkForInput() {
+    if ($('.sup-user').value === '' || $('.sup-name').value === '' || $('.sup-email').value === '' || $('.sup-password').value === '') {
+        return false;
+    }
+    else {
+        return true;
+    }
+}
+
+// i believe we're going to have to use regex for this one
+$('.sup-password').on('input', () => {
+    let pass = $('.sup-password').val();
+    let passLength = pass.length;
+    let passUpper = /[A-Z]/.test(pass);
+    let passLower = /[a-z]/.test(pass);
+    let passNum = /[0-9]/.test(pass);
+    let passSpecial = /[^A-Za-z0-9]/.test(pass);
+
+    // $('.sup-password')
+    // (passLength < 8 || !passUpper || !passLower || !passNum || !passSpecial) {
+    
+    if (passLength >= 8) {
+        console.log("more than 8")
+    }
+    if (passUpper) {
+        console.log('has uppercase')
+    }
+    if (passLower) {
+        console.log('has lowercase')
+    }
+    if (passNum) {
+        console.log('has number')
+    }
+    if (passSpecial) {
+        console.log('has special char')
+    }
+    if (passLength < 8 || !passUpper || !passLower || !passNum || !passSpecial) {
+        
+    }
+    else {
+        
+    }
+})
