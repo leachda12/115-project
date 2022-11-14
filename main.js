@@ -25,8 +25,8 @@ userDatabase.push(new UserData('mildishgambino', 'Donald', 'don-glover@email.com
 
 // ----- fire on page load ----- //
 
-$(document).ready(() => {
-    console.log('test');
+$(document).ready(() => { 
+
 });
 
 
@@ -79,7 +79,6 @@ function emailDupeCheck() {
 
 
 
-
 // ----- event functions ----- //
 
 
@@ -92,3 +91,30 @@ $('.sup-submit').click(() => {
         console.log('error');
     }
 });
+
+// ----- Go to signup page ----- //
+$('.go-to-sup').click(() => {
+    console.log('test');
+    $(".form-log").css("transform", "scale(0.0, 0.0)")
+    $(".form-sup").css({"transform": "scale(1.0,1.0)", "visibility": "visible"})
+});
+
+// ----- Show password requirements ----- //
+$('.sup-password').click(() => {
+    console.log('test');
+    $(".pass-needs").css("display", "block")
+});
+
+
+// ----- Signup Password verification ----- //
+$('.sup-password').keyup(() => {
+    var length = $('.sup-password').val()
+    if(length.length >= 8){
+        console.log('test')
+        $('.upper-req').removeClass("pass-reqX")
+        $('.upper-req').css("color", "green")
+        $('.upper-req').attr("name" , "checkmark-outline")
+    }
+    
+})
+
