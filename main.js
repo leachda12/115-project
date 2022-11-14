@@ -94,16 +94,11 @@ $('.sup-submit').click(() => {
 
 // ----- Go to signup page ----- //
 $('.go-to-sup').click(() => {
-    console.log('test');
     $(".form-log").css("transform", "scale(0.0, 0.0)")
     $(".form-sup").css({"transform": "scale(1.0,1.0)", "visibility": "visible"})
 });
 
 // ----- Show password requirements ----- //
-// $('.sup-password').click(() => {
-//     console.log('test');
-//     $(".pass-needs").css("display", "block")
-// });
 
 $('.sup-password').focusin(() => {
     $('.pass-needs').slideDown(500);
