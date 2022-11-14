@@ -23,6 +23,17 @@ html{
     text-align: center;
     font-weight: 100;
 }
+.sup-mess{
+    font-size: 75%;
+    text-align: center;
+    display: none;
+}
+.sup-good{
+    color: green;
+}
+.sup-bad{
+    color: red;
+}
 .form{
     display: flex;
     flex-direction: column;

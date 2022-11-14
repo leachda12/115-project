@@ -35,12 +35,13 @@ $(document).ready(() => {
 
 function addUser() {
     userDatabase.push(new UserData(
-        $('.sup-user').value,
-        $('.sup-name').value,
-        $('.sup-email').value,
-        $('.sup-password').value
+        $('.sup-user').val() ,
+        $('.sup-name').val(),
+        $('.sup-email').val(),
+        $('.sup-password').val()
     ));
 }
+
 
 function checkForInput() {
     if ($('.sup-user').value === '' || $('.sup-name').value === '' || $('.sup-email').value === '' || $('.sup-password').value === '') {
@@ -51,23 +52,6 @@ function checkForInput() {
     }
 }
 
-// i believe we're going to have to use regex for this one
-function checkPassReqs() {
-    let pass = $('.sup-password').value;
-    let passLength = pass.length
-    let passCapital = /[A-Z]/.test(pass);
-    let passLower = /[a-z]/.test(pass);
-    let passNum = /[0-9]/.test(pass);
-    let passSpecial = /[^A-Za-z0-9]/.test(pass);
-    let passSpace = /\s/.test(pass);
-
-    if (passLength < 8 || passLength > 20 || !passCapital || !passLower || !passNum || !passSpecial || passSpace) {
-        return false;
-    }
-    else {
-        return true;
-    }
-}
 
 function userDupeCheck() {
     return userDatabase.some(({ username }) => username === $('.sup-user').value);
@@ -77,20 +61,37 @@ function emailDupeCheck() {
     return userDatabase.some(({ email }) => email === $('.sup-email').value);
 }
 
+function checkConfirmPass(){
+    let pass = document.getElementById('sup-password').value
+    // $('sup-confirm').textContent  JQUERY wasnt working for some reason
+    let confirm = document.getElementById('sup-confirm').value
+    if(pass === confirm ){
+        return true
+    }
+    else{
+        return false
+    }
+}
+
 
 
 // ----- event functions ----- //
 
-
 $('.sup-submit').click(() => {
-    if (checkForInput() && checkPassReqs() && !userDupeCheck() && !emailDupeCheck()) {
+    if (checkForInput() && checkPassReqs() && !userDupeCheck() && !emailDupeCheck() && checkConfirmPass()) {
         addUser();
-        console.log(userDatabase);
+        // console.log(userDatabase);
+        $('.sup-good').show()
+        $('.sup-bad').hide()
     }
     else {
-        console.log('error');
+        // console.log('error');
+        $('.sup-bad').show()
+        $('.sup-good').hide()
     }
 });
+
+
 
 // ----- Go to signup page ----- //
 $('.go-to-sup').click(() => {
@@ -98,13 +99,12 @@ $('.go-to-sup').click(() => {
     $('.form-log').toggleClass('animate__zoomOutLeft')
     $(".form-log").removeClass('animate__zoomInRight')
 
-    
-    
     $('.form-sup').css("visibility", "visible")
     $(".form-sup").addClass('animate__animated')
     $(".form-sup").toggleClass('animate__zoomInRight')
     $(".form-sup").removeClass('animate__zoomOutLeft')
 });
+
 // ----- Go Back to log-in----- //
 $('.back-btn').click(() => {
     $(".form-sup").removeClass('animate__zoomInRight')
@@ -114,11 +114,9 @@ $('.back-btn').click(() => {
     $(".form-log").removeClass('animate__zoomOutLeft')
 });
 
+
+
 // ----- Show password requirements ----- //
-// $('.sup-password').click(() => {
-//     console.log('test');
-//     $(".pass-needs").css("display", "block")
-// });
 
 $('.sup-password').focusin(() => {
     $('.pass-needs').slideDown(500);
@@ -128,38 +126,89 @@ $('.sup-password').focusin(() => {
 });
 
 
+
 // ----- Signup Password verification ----- //
-$('.sup-password').keyup(() => {
-    var length = $('.sup-password').val()
-    if(length.length >= 8){
-        console.log('test')
+// i believe we're going to have to use regex for this one
+$('.sup-password').on('input', () => {
+    let pass = $('.sup-password').val();
+    let passLength = pass.length;
+    let passUpper = /[A-Z]/.test(pass);
+    let passLower = /[a-z]/.test(pass);
+    let passNum = /[0-9]/.test(pass);
+    let passSpecial = /[^A-Za-z0-9]/.test(pass);
+
+    // $('.sup-password')
+    // (passLength < 8 || !passUpper || !passLower || !passNum || !passSpecial) {
+    
+    if (passLength >= 8) {
+        // console.log("more than 8")
         $('.length-req').addClass("pass-req-check")
         $('.length-req ion-icon').attr("name" , "checkmark-outline")
     }
-    else{
-        $('.length-req').addClass("pass-reqX")
-        $('.length-req').removeClass("pass-req-check")
-        $('.length-req ion-icon').attr("name" , "close-outline")
+    if (passUpper) {
+        // console.log('has uppercase')
+        $('.upper-req').addClass("pass-req-check")
+        $('.upper-req ion-icon').attr("name" , "checkmark-outline")
     }
+    if (passLower) {
+        // console.log('has lowercase')
+        $('.lower-req').addClass("pass-req-check")
+        $('.lower-req ion-icon').attr("name" , "checkmark-outline")
+    }
+    if (passNum) {
+        // console.log('has number')
+        $('.num-req').addClass("pass-req-check")
+        $('.num-req ion-icon').attr("name" , "checkmark-outline")
+
+    }
+    if (passSpecial) {
+        // console.log('has special char')
+        $('.spec-req').addClass("pass-req-check")
+        $('.spec-req ion-icon').attr("name" , "checkmark-outline")
+    }
+    if (passLength < 8 || !passUpper || !passLower || !passNum || !passSpecial) {
+        // console.log(false)
+    }
+    else{
+        // console.log(true)
+        checkPassReqs()
+    }
+        
+    
 })
+function checkPassReqs(){
+    req1 = document.getElementsByClassName('pass-req')[0]
+    req2 = document.getElementsByClassName('pass-req')[1]
+    req3 = document.getElementsByClassName('pass-req')[2]
+    req4 = document.getElementsByClassName('pass-req')[3]
+    req5 = document.getElementsByClassName('pass-req')[4]
+
+    // console.log(reqs)
+        if(req1.classList.contains('pass-req-check') && req2.classList.contains('pass-req-check') && req3.classList.contains('pass-req-check') && req4.classList.contains('pass-req-check') && req5.classList.contains('pass-req-check')  ){
+        return true
+        }
+        else{
+            return false
+        }
+}
 
 // ----- Log-in ----- //
 
-$('.log-submit').click(() => {
-    let logPassword = $('.log-pass').val()
-    let logUsername = $('.log-user').val()
-    for (users of userDatabase){
-        if(users.username === logUsername && users.password === logPassword){
-            $('.welcome').show()
-            $('.err-mess').hide()
-            window.open("http://google.com")
-        }
-        else if(users.username !== logUsername || users.password !== logPassword){
-            $('.err-mess').show()
-            $('.welcome').hide()
-        }
-    }    
-})
+// $('.log-submit').click(() => { //This one still had the err message pop up on correct sign in
+//     let logPassword = $('.log-pass').val()
+//     let logUsername = $('.log-user').val()
+//     for (users of userDatabase){
+//         if(users.username === logUsername && users.password === logPassword){
+//             $('.welcome').show()
+//             $('.err-mess').hide()
+//             window.open("http://google.com")
+//         }
+//         else if(users.username !== logUsername || users.password !== logPassword){
+//             $('.err-mess').show()
+//             $('.welcome').hide()
+//         }
+//     }    
+// })
 
 $('.log-submit').click(() => {
     let logPassword = $('.log-pass').val()
@@ -177,9 +226,20 @@ $('.log-submit').click(() => {
         console.log(listPass)
         window.open("http://google.com")
     }
-    else if(listUsers.indexOf(logUsername) < 0 && listPass.indexOf(logPassword) < 0){
+    else if(listUsers.indexOf(logUsername) < 0 || listPass.indexOf(logPassword) < 0){
         $('.err-mess').show()
         $('.welcome').hide()
     }
 })
+function checkForInput() {
+    if ($('.sup-user').value === '' || $('.sup-name').value === '' || $('.sup-email').value === '' || $('.sup-password').value === '') {
+        return false;
+    }
+    else {
+        return true;
+    }
+}
 
+
+
+$('.sup-sub')
