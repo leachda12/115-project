@@ -54,7 +54,7 @@ function checkForInput() {
 // i believe we're going to have to use regex for this one
 function checkPassReqs() {
     let pass = $('.sup-password').value;
-    let passLength = pass.length;
+    let passLength = pass.length
     let passCapital = /[A-Z]/.test(pass);
     let passLower = /[a-z]/.test(pass);
     let passNum = /[0-9]/.test(pass);
