@@ -78,6 +78,16 @@ html{
     width: 50%;
     margin: 20px auto;
 }
+.back-btn{
+    color: #552583;
+    font-size: 150%;
+    border: none;
+    transition: .4s;
+    cursor: pointer;
+}
+.back-btn:hover{
+    color: #FDB927;
+}
 .submit{
     align-self: center;
     width: fit-content;
@@ -115,14 +125,30 @@ html{
 }
 .form-sup{
     visibility: hidden;
-    transform: scale(0);
-    transition: 1s;
+    /* transform: scale(0); */
+    /* transition: 1s; */
 }
+
 /*Login  */
 .form-log{
     display: block;
-    transform: scale(1);
-    transition: 1s;
+    /* transform: scale(1); */
+    /* transition: 1s; */
+}
+.err-mess{
+   text-align: center;
+    font-size: 75%;
+    color: red;
+    font-style: italic;
+    animation: heartbeat;
+    animation-duration: 2s;
+    display: none;
+}
+.welcome{
+    font-size: 75%;
+    text-align: center;
+    color: green;
+    display: none;
 }
 .log-user{
     width: 90%;

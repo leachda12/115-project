@@ -94,9 +94,24 @@ $('.sup-submit').click(() => {
 
 // ----- Go to signup page ----- //
 $('.go-to-sup').click(() => {
-    console.log('test');
-    $(".form-log").css("transform", "scale(0.0, 0.0)")
-    $(".form-sup").css({"transform": "scale(1.0,1.0)", "visibility": "visible"})
+    $(".form-log").addClass('animate__animated')
+    $('.form-log').toggleClass('animate__zoomOutLeft')
+    $(".form-log").removeClass('animate__zoomInRight')
+
+    
+    
+    $('.form-sup').css("visibility", "visible")
+    $(".form-sup").addClass('animate__animated')
+    $(".form-sup").toggleClass('animate__zoomInRight')
+    $(".form-sup").removeClass('animate__zoomOutLeft')
+});
+// ----- Go Back to log-in----- //
+$('.back-btn').click(() => {
+    $(".form-sup").removeClass('animate__zoomInRight')
+    $(".form-sup").addClass('animate__zoomOutLeft')
+    
+    $(".form-log").addClass('animate__zoomInRight')
+    $(".form-log").removeClass('animate__zoomOutLeft')
 });
 
 // ----- Show password requirements ----- //
@@ -118,10 +133,53 @@ $('.sup-password').keyup(() => {
     var length = $('.sup-password').val()
     if(length.length >= 8){
         console.log('test')
-        $('.upper-req').removeClass("pass-reqX")
-        $('.upper-req').css("color", "green")
-        $('.upper-req').attr("name" , "checkmark-outline")
+        $('.length-req').addClass("pass-req-check")
+        $('.length-req ion-icon').attr("name" , "checkmark-outline")
     }
-    
+    else{
+        $('.length-req').addClass("pass-reqX")
+        $('.length-req').removeClass("pass-req-check")
+        $('.length-req ion-icon').attr("name" , "close-outline")
+    }
+})
+
+// ----- Log-in ----- //
+
+$('.log-submit').click(() => {
+    let logPassword = $('.log-pass').val()
+    let logUsername = $('.log-user').val()
+    for (users of userDatabase){
+        if(users.username === logUsername && users.password === logPassword){
+            $('.welcome').show()
+            $('.err-mess').hide()
+            window.open("http://google.com")
+        }
+        else if(users.username !== logUsername || users.password !== logPassword){
+            $('.err-mess').show()
+            $('.welcome').hide()
+        }
+    }    
+})
+
+$('.log-submit').click(() => {
+    let logPassword = $('.log-pass').val()
+    let logUsername = $('.log-user').val()
+    let listUsers = []
+    let listPass = []
+    for (users of userDatabase){
+        listUsers.push(users.username)
+        listPass.push(users.password)
+    }  
+    if(listUsers.indexOf(logUsername) >0 && listPass.indexOf(logPassword)> 0){
+        $('.welcome').show()
+        $('.err-mess').hide()
+        console.log(listUsers)
+        console.log(listPass)
+        window.open("http://google.com")
+    }
+    else if(listUsers.indexOf(logUsername) < 0 && listPass.indexOf(logPassword) < 0){
+        $('.err-mess').show()
+        $('.welcome').hide()
+    }
 })
 
