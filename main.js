@@ -100,9 +100,16 @@ $('.go-to-sup').click(() => {
 });
 
 // ----- Show password requirements ----- //
-$('.sup-password').click(() => {
-    console.log('test');
-    $(".pass-needs").css("display", "block")
+// $('.sup-password').click(() => {
+//     console.log('test');
+//     $(".pass-needs").css("display", "block")
+// });
+
+$('.sup-password').focusin(() => {
+    $('.pass-needs').slideDown(500);
+    $('.sup-password').focusout(() => {
+        $('.pass-needs').slideUp(500);
+    });
 });
 
 
