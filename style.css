@@ -197,7 +197,7 @@ color: #FDB927;
 
 /* ----- Landing Page -----*/
 
-.home-cover {
+#home-cover {
     position: absolute;
     height: 100%;
     width: 100%;

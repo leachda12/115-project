@@ -235,7 +235,7 @@ $('.sup-sub')
 
 // ---------- Landing Page ---------- //
 
-const homePage = $('.home-cover')
+const homePage = document.getElementById('home-cover');
 
 function pageTransfer() {
     $('.container').fadeOut(2000);
@@ -251,7 +251,7 @@ function nightSky() {
     aspect = 2,
     near = 1.5,
     far = 5;
-    const camera = new THREE.PerpectiveCamera(fov, aspect, near, far);
+    const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
     renderer.render(scene, camera);
 
     const color = 0xfffff,
@@ -260,5 +260,39 @@ function nightSky() {
     light.position.set(-1, 2, 4);
     scene.add(light);
 
-    
+    const boxWidth = 1,
+    boxHeight = 1,
+    boxDepth = 1;
+    const geometry = new THREE.BoxGeometry(boxWidth, boxHeight, boxDepth);
+    const material = new THREE.MeshPhongMaterial({color: 0x44aa88});
+    const cube = new THREE.Mesh(geometry, material);
+    scene.add(cube);
+
+    const resizeRendererToDisplaySize = (renderer) => {
+        const canvas = renderer.domElement;
+        const width = canvas.clientWidth;
+        const height = canvas.clientHeight;
+        const needResize = canvas.width !== width || canvas.height !== height;
+        if (needResize) {
+            renderer.setSize(width, height, false);
+        }
+        return needResize;
+    }
+    const render = (time) => {
+        if (resizeRendererToDisplaySize(renderer)) {
+            const canvas = renderer.domElement;
+            camera.aspect = canvas.clientWidth / canvas.clientHeight;
+            camera.updateProjectionMatrix();
+        }
+        cube.rotation.x = time / 0.0005;
+        cube.rotation.y = time / 0.0005;
+        renderer.render(scene, camera);
+        requestAnimationFrame(render);
+    };
+    requestAnimationFrame(render);
+
+    $('document').mousemove(e => {
+        let xpos = e.pageX;
+        let ypos = e.pageY;
+    });
 };
