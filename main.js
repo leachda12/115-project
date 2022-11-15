@@ -235,6 +235,30 @@ $('.sup-sub')
 
 // ---------- Landing Page ---------- //
 
+const homePage = $('.home-cover')
 
-function tran
+function pageTransfer() {
+    $('.container').fadeOut(2000);
+    $('.form-log').fadeOut(2000);
+}
 
+function nightSky() {
+    const renderer = new THREE.WebGLRenderer({homePage});
+    renderer.setClearColor(new THREE.Color('#552583'));
+
+    const scene = new THREE.Scene();
+    const fov = 75,
+    aspect = 2,
+    near = 1.5,
+    far = 5;
+    const camera = new THREE.PerpectiveCamera(fov, aspect, near, far);
+    renderer.render(scene, camera);
+
+    const color = 0xfffff,
+    intensity = 1;
+    const light = new THREE.DirectionalLight(color, intensity);
+    light.position.set(-1, 2, 4);
+    scene.add(light);
+
+    
+};
