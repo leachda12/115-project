@@ -1,3 +1,9 @@
+// ----- fire on page load ----- //
+
+$(document).ready(() => {
+
+});
+
 // ----- user info storage ----- //
 
 let userDatabase = [];
@@ -23,11 +29,6 @@ userDatabase.push(new UserData('mildishgambino', 'Donald', 'don-glover@email.com
 
 
 
-// ----- fire on page load ----- //
-
-$(document).ready(() => { 
-
-});
 
 
 
@@ -35,7 +36,7 @@ $(document).ready(() => {
 
 function addUser() {
     userDatabase.push(new UserData(
-        $('.sup-user').val() ,
+        $('.sup-user').val(),
         $('.sup-name').val(),
         $('.sup-email').val(),
         $('.sup-password').val()
@@ -61,14 +62,14 @@ function emailDupeCheck() {
     return userDatabase.some(({ email }) => email === $('.sup-email').value);
 }
 
-function checkConfirmPass(){
+function checkConfirmPass() {
     let pass = document.getElementById('sup-password').value
     // $('sup-confirm').textContent  JQUERY wasnt working for some reason
     let confirm = document.getElementById('sup-confirm').value
-    if(pass === confirm ){
+    if (pass === confirm) {
         return true
     }
-    else{
+    else {
         return false
     }
 }
@@ -109,7 +110,7 @@ $('.go-to-sup').click(() => {
 $('.back-btn').click(() => {
     $(".form-sup").removeClass('animate__zoomInRight')
     $(".form-sup").addClass('animate__zoomOutLeft')
-    
+
     $(".form-log").addClass('animate__zoomInRight')
     $(".form-log").removeClass('animate__zoomOutLeft')
 });
@@ -139,44 +140,44 @@ $('.sup-password').on('input', () => {
 
     // $('.sup-password')
     // (passLength < 8 || !passUpper || !passLower || !passNum || !passSpecial) {
-    
+
     if (passLength >= 8) {
         // console.log("more than 8")
         $('.length-req').addClass("pass-req-check")
-        $('.length-req ion-icon').attr("name" , "checkmark-outline")
+        $('.length-req ion-icon').attr("name", "checkmark-outline")
     }
     if (passUpper) {
         // console.log('has uppercase')
         $('.upper-req').addClass("pass-req-check")
-        $('.upper-req ion-icon').attr("name" , "checkmark-outline")
+        $('.upper-req ion-icon').attr("name", "checkmark-outline")
     }
     if (passLower) {
         // console.log('has lowercase')
         $('.lower-req').addClass("pass-req-check")
-        $('.lower-req ion-icon').attr("name" , "checkmark-outline")
+        $('.lower-req ion-icon').attr("name", "checkmark-outline")
     }
     if (passNum) {
         // console.log('has number')
         $('.num-req').addClass("pass-req-check")
-        $('.num-req ion-icon').attr("name" , "checkmark-outline")
+        $('.num-req ion-icon').attr("name", "checkmark-outline")
 
     }
     if (passSpecial) {
         // console.log('has special char')
         $('.spec-req').addClass("pass-req-check")
-        $('.spec-req ion-icon').attr("name" , "checkmark-outline")
+        $('.spec-req ion-icon').attr("name", "checkmark-outline")
     }
     if (passLength < 8 || !passUpper || !passLower || !passNum || !passSpecial) {
         // console.log(false)
     }
-    else{
+    else {
         // console.log(true)
         checkPassReqs()
     }
-        
-    
+
+
 })
-function checkPassReqs(){
+function checkPassReqs() {
     req1 = document.getElementsByClassName('pass-req')[0]
     req2 = document.getElementsByClassName('pass-req')[1]
     req3 = document.getElementsByClassName('pass-req')[2]
@@ -184,49 +185,33 @@ function checkPassReqs(){
     req5 = document.getElementsByClassName('pass-req')[4]
 
     // console.log(reqs)
-        if(req1.classList.contains('pass-req-check') && req2.classList.contains('pass-req-check') && req3.classList.contains('pass-req-check') && req4.classList.contains('pass-req-check') && req5.classList.contains('pass-req-check')  ){
+    if (req1.classList.contains('pass-req-check') && req2.classList.contains('pass-req-check') && req3.classList.contains('pass-req-check') && req4.classList.contains('pass-req-check') && req5.classList.contains('pass-req-check')) {
         return true
-        }
-        else{
-            return false
-        }
+    }
+    else {
+        return false
+    }
 }
 
 // ----- Log-in ----- //
-
-// $('.log-submit').click(() => { //This one still had the err message pop up on correct sign in
-//     let logPassword = $('.log-pass').val()
-//     let logUsername = $('.log-user').val()
-//     for (users of userDatabase){
-//         if(users.username === logUsername && users.password === logPassword){
-//             $('.welcome').show()
-//             $('.err-mess').hide()
-//             window.open("http://google.com")
-//         }
-//         else if(users.username !== logUsername || users.password !== logPassword){
-//             $('.err-mess').show()
-//             $('.welcome').hide()
-//         }
-//     }    
-// })
 
 $('.log-submit').click(() => {
     let logPassword = $('.log-pass').val()
     let logUsername = $('.log-user').val()
     let listUsers = []
     let listPass = []
-    for (users of userDatabase){
+    for (users of userDatabase) {
         listUsers.push(users.username)
         listPass.push(users.password)
-    }  
-    if(listUsers.indexOf(logUsername) >0 && listPass.indexOf(logPassword)> 0){
+    }
+    if (listUsers.indexOf(logUsername) > 0 && listPass.indexOf(logPassword) > 0) {
         $('.welcome').show()
         $('.err-mess').hide()
         console.log(listUsers)
         console.log(listPass)
         window.open("http://google.com")
     }
-    else if(listUsers.indexOf(logUsername) < 0 || listPass.indexOf(logPassword) < 0){
+    else if (listUsers.indexOf(logUsername) < 0 || listPass.indexOf(logPassword) < 0) {
         $('.err-mess').show()
         $('.welcome').hide()
     }
@@ -241,5 +226,15 @@ function checkForInput() {
 }
 
 
-
 $('.sup-sub')
+
+
+
+
+
+
+// ---------- Landing Page ---------- //
+
+
+function tran
+

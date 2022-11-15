@@ -187,3 +187,18 @@ a:hover{
 text-decoration: none;
 color: #FDB927;
 }
+
+
+
+
+/* ----- Landing Page -----*/
+
+.home-cover {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    display: block;
+    display: hidden;
+}
+
