@@ -235,64 +235,92 @@ $('.sup-sub')
 
 // ---------- Landing Page ---------- //
 
-const homePage = document.getElementById('home-cover');
+const canvas = document.getElementById('home-cover');
+
+$(document).ready(() => {
+    canvas.style.opacity = 1;
+})
+
 
 function pageTransfer() {
     $('.container').fadeOut(2000);
     $('.form-log').fadeOut(2000);
 }
+const resizeRendererToDisplaySize = (renderer) => {
+    const canvas = renderer.domElement;
+    const width = canvas.clientWidth;
+    const height = canvas.clientHeight;
+    const needResize = canvas.width !== width || canvas.height !== height;
+    // resize only when necessary
+    if (needResize) {
+        //3rd parameter `false` to change the internal canvas size
+        renderer.setSize(width, height, false);
+    }
+    return needResize;
+};
+
+let xpos = 0;
+let ypos = 0;
+
+document.addEventListener('mousemove', e => {
+    xpos = e.pageX;
+    ypos = e.pageY;
+    console.log(xpos)
+});
+
+const getRandomParticlePos = (particleCount) => {
+    const starr = new Float32Array(particleCount * 3);
+    for (let i = 0; i < particleCount; i++) {
+        starr[i] = (Math.random() - 0.5) * 8;
+    }
+    return starr;
+}
 
 function nightSky() {
-    const renderer = new THREE.WebGLRenderer({homePage});
-    renderer.setClearColor(new THREE.Color('#552583'));
-
-    const scene = new THREE.Scene();
-    const fov = 75,
-    aspect = 2,
-    near = 1.5,
-    far = 5;
+    const homePage = document.getElementById('home-cover');
+    const renderer = new THREE.WebGLRenderer({ canvas: homePage });
+    renderer.setClearColor(new THREE.Color('#200f33'));
+    const fov = 75;
+    const aspect = 2;
+    const near = 0.1;
+    const far = 5;
     const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-    renderer.render(scene, camera);
+    camera.position.z = 2;
+    const scene = new THREE.Scene();
+    // renderer.render(scene, camera);
 
     const color = 0xfffff,
-    intensity = 1;
+        intensity = 1;
     const light = new THREE.DirectionalLight(color, intensity);
     light.position.set(-1, 2, 4);
     scene.add(light);
 
     const boxWidth = 1,
-    boxHeight = 1,
-    boxDepth = 1;
-    const geometry = new THREE.BoxGeometry(boxWidth, boxHeight, boxDepth);
-    const material = new THREE.MeshPhongMaterial({color: 0x44aa88});
-    const cube = new THREE.Mesh(geometry, material);
-    scene.add(cube);
+        boxHeight = 1,
+        boxDepth = 1;
+    // const geometry = new THREE.BoxGeometry(boxWidth, boxHeight, boxDepth);
+    // const material = new THREE.MeshPhongMaterial({color: 0x44aa88});
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute('position', new THREE.BufferAttribute(getRandomParticlePos(400), 3));
+    const material = new THREE.PointsMaterial({ size: 0.05, /*color: 0x44aa88*/ })
+    const cube = new THREE.Points(geometry, material);
 
-    const resizeRendererToDisplaySize = (renderer) => {
-        const canvas = renderer.domElement;
-        const width = canvas.clientWidth;
-        const height = canvas.clientHeight;
-        const needResize = canvas.width !== width || canvas.height !== height;
-        if (needResize) {
-            renderer.setSize(width, height, false);
-        }
-        return needResize;
+  scene.add(cube);
+  const render = (time) => {
+    time *= 0.001; 
+    if (resizeRendererToDisplaySize(renderer)) {
+      const canvas = renderer.domElement;
+      camera.aspect = canvas.clientWidth / canvas.clientHeight;
+      camera.updateProjectionMatrix();
     }
-    const render = (time) => {
-        if (resizeRendererToDisplaySize(renderer)) {
-            const canvas = renderer.domElement;
-            camera.aspect = canvas.clientWidth / canvas.clientHeight;
-            camera.updateProjectionMatrix();
-        }
-        cube.rotation.x = time / 0.0005;
-        cube.rotation.y = time / 0.0005;
-        renderer.render(scene, camera);
-        requestAnimationFrame(render);
-    };
-    requestAnimationFrame(render);
+    cube.rotation.x = ypos * 0.001;
+    cube.rotation.y = xpos * 0.001;
 
-    $('document').mousemove(e => {
-        let xpos = e.pageX;
-        let ypos = e.pageY;
-    });
+    renderer.render(scene, camera);
+    requestAnimationFrame(render);
+  };
+  requestAnimationFrame(render);
 };
+
+nightSky();
+
