@@ -5,6 +5,8 @@
     box-sizing: border-box;
 }
 html{
+    height: 100%;
+    width: 100%;
     font-size: 20px;
     font-family: 'comfortaa' , sans-serif;
     position: relative;
@@ -201,15 +203,14 @@ color: #FDB927;
     position: absolute;
     height: 100%;
     width: 100%;
-    z-index: -1;
-    display: block;
-    /* display: hidden; */
+    /* z-index: -1; */
+    opacity: 0;
 }
 
-.container,
+/* .container,
 .form-log {
     display: none;
 }
 html {
     background: none;
-}
+} */

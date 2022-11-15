@@ -209,7 +209,7 @@ $('.log-submit').click(() => {
         $('.err-mess').hide()
         console.log(listUsers)
         console.log(listPass)
-        window.open("http://google.com")
+        pageTransfer()
     }
     else if (listUsers.indexOf(logUsername) < 0 || listPass.indexOf(logPassword) < 0) {
         $('.err-mess').show()
@@ -237,14 +237,16 @@ $('.sup-sub')
 
 const canvas = document.getElementById('home-cover');
 
-$(document).ready(() => {
-    canvas.style.opacity = 1;
-})
+// $(document).ready(() => {
+//     canvas.style.opacity = 1;
+// })
 
 
 function pageTransfer() {
     $('.container').fadeOut(2000);
     $('.form-log').fadeOut(2000);
+    // $('html').animate({background: 'none'}, 3000);
+    $('#home-cover').animate({opacity: 1}, 5000);
 }
 const resizeRendererToDisplaySize = (renderer) => {
     const canvas = renderer.domElement;
