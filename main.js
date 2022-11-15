@@ -243,8 +243,8 @@ const canvas = document.getElementById('home-cover');
 
 
 function pageTransfer() {
-    $('.container').fadeOut(2000);
-    $('.form-log').fadeOut(2000);
+    $('.container').fadeOut(500);
+    $('.form-log').fadeOut(500);
     // $('html').animate({background: 'none'}, 3000);
     $('#home-cover').animate({opacity: 1}, 5000);
 }
